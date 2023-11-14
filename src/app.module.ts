@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { QuotesModule } from './quotes/quotes.module';
+import { Quote } from './quotes/entities/quote.entity';
 
 @Module({
   imports: [
@@ -11,10 +13,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'postgres',
       password: 'pg16@23',
       database: 'finance-and-billing-db',
-      entities: [],
+      entities: [Quote],
       synchronize: true,
       autoLoadEntities: true,
     }),
+    QuotesModule,
   ],
   controllers: [],
   providers: [],
