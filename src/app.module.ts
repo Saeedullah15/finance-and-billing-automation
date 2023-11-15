@@ -5,6 +5,8 @@ import { QuotesModule } from './quotes/quotes.module';
 import { Quote } from './quotes/entities/quote.entity';
 import { SalesTaxModule } from './sales-tax/sales-tax.module';
 import { SalesTax } from './sales-tax/entities/sales-tax.entity';
+import { AnalyticsModule } from './analytics/analytics.module';
+import { Analytics } from './analytics/entities/analytics.entity';
 
 @Module({
   imports: [
@@ -15,12 +17,13 @@ import { SalesTax } from './sales-tax/entities/sales-tax.entity';
       username: 'postgres',
       password: 'pg16@23',
       database: 'finance-and-billing-db',
-      entities: [Quote, SalesTax],
+      entities: [Quote, SalesTax, Analytics],
       synchronize: true,
       autoLoadEntities: true,
     }),
     QuotesModule,
     SalesTaxModule,
+    AnalyticsModule,
   ],
   controllers: [],
   providers: [],
