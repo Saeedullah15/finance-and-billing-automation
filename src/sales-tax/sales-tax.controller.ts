@@ -2,8 +2,10 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { SalesTaxService } from './sales-tax.service';
 import { CreateSalesTaxDto } from './dto/create-sales-tax.dto';
+import { ApiTags } from '@nestjs/swagger';
 // import { UpdateSalesTaxDto } from './dto/update-sales-tax.dto';
 
+@ApiTags('Sales Tax')
 @Controller('sales-tax')
 export class SalesTaxController {
   constructor(private readonly salesTaxService: SalesTaxService) { }
