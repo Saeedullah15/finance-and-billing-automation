@@ -11,6 +11,7 @@ export class QuotesService {
   // inject quote repository
   constructor(@InjectRepository(Quote) private readonly quoteRepository: Repository<Quote>) { }
 
+  // POST
   create(createQuoteDto: CreateQuoteDto): Promise<Quote> {
     const quote: Quote = new Quote();
     quote.customerName = createQuoteDto.customerName;
@@ -21,14 +22,17 @@ export class QuotesService {
     return this.quoteRepository.save(quote);
   }
 
+  // GET all
   findAll(): Promise<Quote[]> {
     return this.quoteRepository.find();
   }
 
+  // GET one
   findOne(id: number) {
     return this.quoteRepository.findOneBy({ id });
   }
 
+  // PATCH
   update(id: number, updateQuoteDto: UpdateQuoteDto) {
     const quote: Quote = new Quote();
     quote.customerName = updateQuoteDto.customerName;
@@ -40,6 +44,7 @@ export class QuotesService {
     return this.quoteRepository.save(quote);
   }
 
+  // DELETE
   remove(id: number) {
     return this.quoteRepository.delete(id);
   }
