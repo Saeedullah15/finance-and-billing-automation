@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { QuotesModule } from './quotes/quotes.module';
@@ -11,6 +10,10 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { Dashboard } from './dashboard/entities/dashboard.entity';
 import { FixedAssetsModule } from './fixed-assets/fixed-assets.module';
 import { FixedAsset } from './fixed-assets/entities/fixed-asset.entity';
+import { User } from './user.entity';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+import { JwtModule } from "@nestjs/jwt";
 
 @Module({
   imports: [
@@ -21,7 +24,7 @@ import { FixedAsset } from './fixed-assets/entities/fixed-asset.entity';
       username: 'postgres',
       password: 'pg16@23',
       database: 'finance-and-billing-db',
-      entities: [Quote, SalesTax, Analytics, Dashboard, FixedAsset],
+      entities: [Quote, SalesTax, Analytics, Dashboard, FixedAsset, User],
       synchronize: true,
       autoLoadEntities: true,
     }),
@@ -30,8 +33,13 @@ import { FixedAsset } from './fixed-assets/entities/fixed-asset.entity';
     AnalyticsModule,
     DashboardModule,
     FixedAssetsModule,
+    TypeOrmModule.forFeature([User]),
+    JwtModule.register({
+      secret: "secret",
+      signOptions: { expiresIn: "1d" }
+    })
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule { }
